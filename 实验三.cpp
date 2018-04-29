@@ -15,12 +15,14 @@
 //void __copyto(Mat origin, Mat sur, Mat mask, CvPoint point);
 //Mat __rectangle(Mat img, int x1, int y1, int x2, int y2);
 //Mat _histogram(Mat img);
+//Mat mask_mat(Mat elephant);
 //CvPoint P1,P2,P3,P4,P5,P6,P7,P8,P0;
 //
 //int main(int argc, char* argv[])
 //{
-//	Mat img = imread("elephant.jpg"), img_rect;
+//	Mat img = imread("elephant.jpg"), img_rect,source=img.clone();
 //	vector<Mat> elephant;
+//	vector<Mat> mask;
 //	P1.x = 60;
 //	P1.y = 10;
 //	P2.x = 160;
@@ -46,99 +48,114 @@
 //		switch (i)
 //		{
 //		case 1:
-//			img = __rectangle(img, 60,10,160,700);
 //			rect = Rect(60, 10, 160-60, 700-10);//100
 //			elephant.push_back(img(rect).clone());
+//			img = __rectangle(img, 60,10,160,700);
 //		case 2:
-//			img = __rectangle(img, 170,10,250,700);
 //			rect = Rect(170, 10, 250-170, 700-10); //80
 //			elephant.push_back(img(rect).clone());
+//			img = __rectangle(img, 170,10,250,700);
 //		case 3:
-//			img = __rectangle(img, 260,10,380,700);
 //			rect = Rect(260, 10, 380-260, 700-10);//120
 //			elephant.push_back(img(rect).clone());
+//			img = __rectangle(img, 260,10,380,700);
 //		case 4:
-//			img = __rectangle(img, 393,10,490,700);
 //			rect = Rect(393, 10, 490-393, 700-10);//97
 //			elephant.push_back(img(rect).clone());
+//			img = __rectangle(img, 393,10,490,700);
 //		case 5:
-//			img = __rectangle(img, 502,10,580,700);
 //			rect = Rect(502, 10, 580-502, 700-10);//78
 //			elephant.push_back(img(rect).clone());
+//			img = __rectangle(img, 502,10,580,700);
 //		case 6:
-//			img = __rectangle(img, 590,10,682,700);
 //			rect = Rect(590, 10, 682-590, 700-10);//92
 //			elephant.push_back(img(rect).clone());
+//			img = __rectangle(img, 590,10,682,700);
 //		case 7:
-//			img = __rectangle(img,695,10,795,700);
 //			rect = Rect(695, 10, 795-695, 700-10);//100
 //			elephant.push_back(img(rect).clone());
+//			img = __rectangle(img,695,10,795,700);
 //		case 8:
-//			img = __rectangle(img, 800,10,903,700);
 //			rect = Rect(800, 10, 903-800, 700-10);//103
 //			elephant.push_back(img(rect).clone());
+//			img = __rectangle(img, 800,10,903,700);
 //		default:
 //			break;
 //		}
 //	}
 //	namedWindow("Image", 2);
 //	imshow("Image", img);
-//	//¸´ÖÆÍ¼Ïñ
+//	//¸´ÖÆ´æ´¢Í¼Ïñ
 //	int img_width = 103 + 100 + 92 + 78 + 97 + 120 + 80 + 100,img_height=690;
 //	Mat result = Mat::zeros( img_height,img_width, CV_8UC3);
 //	CvPoint P;
-//	P.x = P.y = 0;
-//	__copy(result, elephant[4], P); imwrite(format("./result/elephant_0.jpg"), elephant[4]);
-//	P.x = 78; __copy(result, elephant[0], P); imwrite(format("./result/elephant_1.jpg"), elephant[0]);
-//	P.x = 178; __copy(result, elephant[7], P); imwrite(format("./result/elephant_2.jpg"), elephant[7]);
-//	P.x = 178+103; __copy(result, elephant[2], P); imwrite(format("./result/elephant_3.jpg"), elephant[2]);
-//	P.x = 178 + 103+120; __copy(result, elephant[5], P); imwrite(format("./result/elephant_4.jpg"), elephant[5]);
-//	P.x = 178 + 103 + 120+92; __copy(result, elephant[3],P); imwrite(format("./result/elephant_5.jpg"), elephant[3]);
-//	P.x = 178 + 103 + 120 + 92 + 97; __copy(result, elephant[6], P); imwrite(format("./result/elephant_6.jpg"), elephant[6]);
-//	P.x = 178 + 103 + 120 + 92 + 97 + 100; __copy(result, elephant[1], P); imwrite(format("./result/elephant_7.jpg"), elephant[1]);
-//	namedWindow("result", 2);
+//	P.x = P.y = 0;__copy(result, elephant[4], P); imwrite(format("./result/elephant_0.jpg"), elephant[4]); mask.push_back(mask_mat(elephant[4]));
+//	P.x = 78; __copy(result, elephant[0], P); imwrite(format("./result/elephant_1.jpg"), elephant[0]); mask.push_back(mask_mat(elephant[0]));
+//	P.x = 178; __copy(result, elephant[7], P); imwrite(format("./result/elephant_2.jpg"), elephant[7]); mask.push_back(mask_mat(elephant[7]));
+//	P.x = 178+103; __copy(result, elephant[2], P); imwrite(format("./result/elephant_3.jpg"), elephant[2]); mask.push_back(mask_mat(elephant[2]));
+//	P.x = 178 + 103+120; __copy(result, elephant[5], P); imwrite(format("./result/elephant_4.jpg"), elephant[5]); mask.push_back(mask_mat(elephant[4]));
+//	P.x = 178 + 103 + 120+92; __copy(result, elephant[3],P); imwrite(format("./result/elephant_5.jpg"), elephant[3]); mask.push_back(mask_mat(elephant[3]));
+//	P.x = 178 + 103 + 120 + 92 + 97; __copy(result, elephant[6], P); imwrite(format("./result/elephant_6.jpg"), elephant[6]); mask.push_back(mask_mat(elephant[6]));
+//	P.x = 178 + 103 + 120 + 92 + 97 + 100; __copy(result, elephant[1], P); imwrite(format("./result/elephant_7.jpg"), elephant[1]); mask.push_back(mask_mat(elephant[1]));
+//	namedWindow("result", 3);
 //	imshow("result", result);
-//	//
-//	/*Mat k_mean = Kmeans_segment(result);
-//	namedWindow("keans", 3);
-//	imshow("keans", k_mean);*/
-//	//´æ´¢Í¼Ïñ
-//	/*for (int i = 0; i < 8; i++) {
-//		imwrite(format("./result/elephant_%d.jpg",i),elephant[i]);
-//	}*/
+//	
+//
+//
+//	namedWindow("tr", 5);
+//	imshow("tr", elephant[1]);
+//
 //	waitKey();
 //	return 0;
 //}
+////-----------------------------------------------------------------------------------------------------
 //
-//Mat copy_tree(Mat img, Mat label) {
-//	Mat origin = img.clone();
-//	Rect rect = Rect(P1.x, P1.y, P2.x-P1.x, P2.y-P1.y);
-//	//reusltÊÇ²ÊÉ« copyÊÇ»Ò¶È
-//	Mat result = origin(rect).clone();
-//	Mat copy = label(rect).clone();
-//	Mat mask = Mat::zeros(copy.rows,copy.cols, CV_8UC1);
+//Mat __merge(vector<Mat> elephant, vector<Mat> mask) {
+//	int img_width = 103 + 100 + 92 + 78 + 97 + 120 + 80 + 100, img_height = 690,bound=0;
+//	CvPoint P;
+//	P.x = P.y = 0;
+//	Mat result = Mat::zeros(img_height, img_width, CV_8UC3);
+//	for (int i = 0; i < 8; i++) {
+//		switch (i)
+//		{
+//		case 1:
+//			bound = 0;
+//			P.x -= bound;
+//			//__copyto(result,elephant[])
+//			break;
+//		default:
+//			break;
+//		}
+//	}
+//}
 //
+//
+//
+//
+//Mat mask_mat(Mat elephant) {
+//	Mat gra = threshhold_segment(elephant);
+//	Mat mask = Mat::zeros(gra.rows,gra.cols, CV_8UC1);
 //	int nr, nc;
-//	nr = result.rows; nc = result.cols;
+//	nr = elephant.rows; nc = elephant.cols;
 //	cout << "the rows cols of result:" << nr << ' ' << nc<<endl;
 //	cout << "the rows cols of mask:" << mask.rows << ' ' << mask.cols<<endl;
 //	for (int i = 0; i < nr; i++) {
 //		for (int j = 0; j < nc; j++) {
-//			if (copy.at<uchar>(i, j) != 255) {
-//				result.at<Vec3b>(i, j)[0] = 0;
-//				result.at<Vec3b>(i, j)[1] = 0;
-//				result.at<Vec3b>(i, j)[2] = 0;
+//			if (gra.at<uchar>(i, j) != 255) {
+//				//cout << "true"<<endl;
+//				elephant.at<Vec3b>(i, j)[0] = 0;
+//				elephant.at<Vec3b>(i, j)[1] = 0;
+//				elephant.at<Vec3b>(i, j)[2] = 0;
 //			}
-//			else
+//			else {
 //				mask.at<uchar>(i, j) = 1;
+//				//cout << "false" << endl;
+//			}
 //		}
 //	}
-//	cout << "copyto"<<endl;
-//	//½«result¸´ÖÆµ½origin
-//	__copyto(origin, result, mask, P3);
-//	return origin;
-//
+//	return mask;
 //}
+//
 //void __copyto(Mat origin, Mat sur, Mat mask,CvPoint point) {
 //	cout << "the rows cols of sur:" << sur.rows << ' ' << sur.cols<<endl;
 //	cout << "the rows cols of mask:" << mask.rows << ' ' << mask.cols<<endl;
@@ -189,7 +206,7 @@
 //	Mat gray;
 //	cvtColor(img, gray, CV_RGB2GRAY);
 //	Mat dst, histogram_image;
-//	threshold(gray, dst, 60, 255, THRESH_BINARY_INV);
+//	threshold(gray, dst, 200, 255, THRESH_BINARY_INV);
 //	return dst;
 //}
 //Mat _histogram(Mat img) {
